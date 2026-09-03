@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>José Hinostroza Cárdenas — Riesgos, Auditoría & Data Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101a29;
+    --paper:#f4f0e6;
+    --paper-dim:#eae4d4;
+    --rule:#c9bfa2;
+    --gold:#a9812f;
+    --gold-deep:#7c5e21;
+    --teal:#33564f;
+    --muted:#5b6472;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  a{color:var(--gold-deep);}
+
+  /* ===== HEADER / MASTHEAD ===== */
+  header.masthead{
+    border-bottom:2px solid var(--ink);
+    padding-top:44px;
+    padding-bottom:18px;
+  }
+  .masthead-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.02em;
+    color:var(--muted);
+  }
+  .masthead-top span{white-space:nowrap;}
+  h1.name{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:clamp(40px, 7vw, 68px);
+    line-height:1.02;
+    margin:18px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .role-line{
+    font-size:17px;
+    color:var(--teal);
+    font-weight:500;
+    margin:0 0 22px;
+  }
+
+  /* ===== STAT ROW (like balance-sheet summary) ===== */
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--rule);
+    text-align:center;
+    justify-items:center;
+  }
+  .stat{
+    padding:16px 18px;
+    border-right:1px solid var(--rule);
+    width:100%;
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:26px;
+    font-weight:500;
+    color:var(--gold-deep);
+    display:block;
+  }
+  .stat .label{
+    font-size:12.5px;
+    color:var(--muted);
+    margin-top:2px;
+    display:block;
+  }
+
+  /* ===== SECTION GENERAL ===== */
+  section{padding:52px 0;}
+  section + section{border-top:1px solid var(--rule);}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:28px;
+  }
+  .section-head h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:28px;
+    margin:0;
+  }
+  .section-index{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  /* ===== SOBRE MI ===== */
+  .lede{
+    font-family:'Newsreader', serif;
+    font-size:20px;
+    font-style:italic;
+    color:var(--teal);
+    max-width:70ch;
+    margin:0 0 18px;
+  }
+  .body-text{max-width:66ch; color:#2b3542;}
+
+  /* ===== SKILLS ===== */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px 40px;
+  }
+  .skill-cat h3{
+    font-size:13px;
+    text-transform:none;
+    font-weight:600;
+    color:var(--gold-deep);
+    margin:0 0 8px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:6px;
+  }
+  .skill-cat ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:14.5px;
+    color:#2b3542;
+  }
+  .skill-cat li{
+    padding:5px 0;
+    border-bottom:1px dotted var(--rule);
+  }
+  .skill-cat li:last-child{border-bottom:none;}
+
+  /* ===== PROJECTS (ledger lines) ===== */
+  .ledger{
+    width:100%;
+    border-collapse:collapse;
+  }
+  .ledger-item{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:6px 24px;
+    padding:18px 0;
+    border-bottom:1px solid var(--rule);
+    align-items:start;
+  }
+  .ledger-item:first-child{padding-top:0;}
+  .ledger-item .proj-name{
+    font-family:'Newsreader', serif;
+    font-size:19px;
+    font-weight:500;
+    margin:0 0 4px;
+  }
+  .ledger-item .proj-org{
+    font-size:12.5px;
+    color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .ledger-item .proj-desc{
+    font-size:14.5px;
+    color:#2b3542;
+    margin-top:6px;
+    max-width:58ch;
+  }
+  .ledger-item .proj-result{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--teal);
+    font-weight:500;
+    white-space:nowrap;
+    text-align:right;
+    padding-top:2px;
+  }
+
+  /* ===== CERTIFICATIONS ===== */
+  .cert-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .cert-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px dotted var(--rule);
+    font-size:15px;
+  }
+  .cert-row:last-child{border-bottom:none;}
+  .cert-title{font-weight:500;}
+  .cert-issuer{
+    font-size:12.5px;
+    color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer{
+    padding:52px 0 70px;
+  }
+  .contact-block{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    border-top:2px solid var(--ink);
+    padding-top:26px;
+  }
+  .contact-block h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:30px;
+    margin:0 0 6px;
+  }
+  .contact-block p{
+    margin:0;
+    color:var(--muted);
+    font-size:14.5px;
+  }
+  .contact-links{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .contact-links a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--ink);
+    border:1px solid var(--ink);
+    padding:10px 16px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .foot-note{
+    margin-top:30px;
+    font-size:12px;
+    color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width:640px){
+    .stat-row{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .skills-grid{grid-template-columns:1fr;}
+    .ledger-item{grid-template-columns:1fr;}
+    .ledger-item .proj-result{text-align:left;}
+    .cert-row{grid-template-columns:1fr;}
+    .cert-issuer{text-align:left;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <span>LIMA, PERÚ</span>
+      <span>INGENIERÍA ECONÓMICA — UNI</span>
+      <span>DNI 71194861</span>
+    </div>
+    <h1 class="name">José Hinostroza<br>Cárdenas</h1>
+    <p class="role-line">Auditoría (Finanzas, Procesos, Sistemas y Tecnología) · Riesgos Financieros · Data Analytics</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="num">30 d → 3 min</span>
+        <span class="label">Reportes BCRP automatizados</span>
+      </div>
+      <div class="stat">
+        <span class="num">4+</span>
+        <span class="label">Años en riesgos & auditoría</span>
+      </div>
+      <div class="stat">
+        <span class="num">80%</span>
+        <span class="label">Reducción tiempo modelo AML/TF</span>
+      </div>
+      <div class="stat">
+        <span class="num">5°</span>
+        <span class="label">Superior — UNI</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre-mi">
+    <div class="section-head">
+      <h2>Sobre mí</h2>
+      <span class="section-index">01</span>
+    </div>
+    <p class="lede">Convierto procesos financieros lentos y expuestos a riesgo en sistemas medibles, controlados y automatizados.</p>
+    <p class="body-text">
+      Bachiller en Ingeniería Económica por la Universidad Nacional de Ingeniería, con especialización en Riesgos Financieros y Ciencia de Datos. Mi trabajo cruza auditoría de sistemas, procesos y tecnología con riesgo financiero — desde el diseño de dashboards de control hasta la automatización de reportes regulatorios exigidos por SBS, SMV y BCRP. Actualmente en Banco de Comercio, dentro del equipo de Auditoría de Sistemas y Procesos.
+    </p>
+  </section>
+
+  <section id="herramientas">
+    <div class="section-head">
+      <h2>Herramientas</h2>
+      <span class="section-index">02</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>Lenguajes & Análisis</h3>
+        <ul>
+          <li>Python</li>
+          <li>SQL</li>
+          <li>R Studio</li>
+          <li>Matlab</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Visualización & BI</h3>
+        <ul>
+          <li>Power BI</li>
+          <li>Tableau</li>
+          <li>Qlik Sense</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Automatización</h3>
+        <ul>
+          <li>n8n</li>
+          <li>Google Apps Script</li>
+          <li>Excel Avanzado / Financiero</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Cloud, Datos & ERP</h3>
+        <ul>
+          <li>SQL Server</li>
+          <li>AWS · Microsoft Azure</li>
+          <li>SAP MM / PP / FICO</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="section-head">
+      <h2>Proyectos & logros</h2>
+      <span class="section-index">03</span>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Automatización de reportes BCRP 1–4 (MN)</p>
+          <span class="proj-org">Banco de Comercio</span>
+          <p class="proj-desc">Rediseñé la elaboración de los reportes presentados al BCRP, pasando de un proceso manual de semanas a una ejecución de minutos.</p>
+        </div>
+        <div class="proj-result">30 días → 3 min</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Control y conciliación de cuentas transitorias</p>
+          <span class="proj-org">Banco de Comercio</span>
+          <p class="proj-desc">Sistema de control conforme a NIIF y normativa tributaria, con dashboard en Qlik Sense para Gerencia y Dirección sobre antigüedad, movimientos y riesgo.</p>
+        </div>
+        <div class="proj-result">25% más rápido</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Monitoreo de cheques sin fondo</p>
+          <span class="proj-org">Banco de Comercio</span>
+          <p class="proj-desc">Sistema alineado a normativa SBS y Ley General del Sistema Financiero, con dashboard analítico de reincidencia y alertas preventivas para alta dirección.</p>
+        </div>
+        <div class="proj-result">Riesgo legal ↓</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Adecuación NIIF 9, 13 y 15</p>
+          <span class="proj-org">Caja Arequipa</span>
+          <p class="proj-desc">Proyecto de riesgo de mercado y liquidez requerido por la SBS, sobre instrumentos financieros y medición del valor razonable.</p>
+        </div>
+        <div class="proj-result">Cumplimiento SBS</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Automatización del modelo de riesgo AML/TF</p>
+          <span class="proj-org">ACRES Finance</span>
+          <p class="proj-desc">Automatización del cálculo estadístico en el registro de operaciones y actualización del manual PLAFT conforme a normativa SMV.</p>
+        </div>
+        <div class="proj-result">80% menos tiempo</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Fichas de clasificación de deudores</p>
+          <span class="proj-org">Banco de Comercio</span>
+          <p class="proj-desc">Aplicativo para automatizar la elaboración de fichas y sistema de alertas para actividades atípicas en cuentas de balance.</p>
+        </div>
+        <div class="proj-result">30% más rápido</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Modelo de calificación crediticia interno</p>
+          <span class="proj-org">Fondo Mivivienda</span>
+          <p class="proj-desc">Actualización y optimización de variables del modelo, implementado con éxito cumpliendo las directrices de la SBS.</p>
+        </div>
+        <div class="proj-result">+25% precisión</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Evaluación de riesgos de cartera de inversiones</p>
+          <span class="proj-org">Proyecto académico</span>
+          <p class="proj-desc">Modelo Value-at-Risk (VaR) para evaluar el riesgo de una cartera, con optimización de la asignación de activos. Python, SQL, Power BI.</p>
+        </div>
+        <div class="proj-result">Riesgo optimizado</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Monitoreo de riesgo crediticio en tiempo real</p>
+          <span class="proj-org">Proyecto académico</span>
+          <p class="proj-desc">Sistema en tiempo real para monitorear riesgo crediticio, mejorando la capacidad de respuesta ante eventos de riesgo. Python, SQL, R Studio.</p>
+        </div>
+        <div class="proj-result">Respuesta en tiempo real</div>
+      </div>
+
+      <div class="ledger-item">
+        <div>
+          <p class="proj-name">Optimización de cadena de suministro en retail</p>
+          <span class="proj-org">Proyecto académico</span>
+          <p class="proj-desc">Análisis de grandes conjuntos de datos de inventario y ventas, visualizado en dashboards de Power BI. SQL, R Studio.</p>
+        </div>
+        <div class="proj-result">Eficiencia ↑</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificaciones">
+    <div class="section-head">
+      <h2>Certificaciones recientes</h2>
+      <span class="section-index">04</span>
+    </div>
+    <div class="cert-list">
+      <div class="cert-row">
+        <span class="cert-title">Auditoría de Ciberseguridad: Guía definitiva desde cero</span>
+        <span class="cert-issuer">Udemy — sep. 2026</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">OpenAI Agent Builder: Crea tus propios Agentes de IA</span>
+        <span class="cert-issuer">Udemy — sep. 2026</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">ISO 19011:2018 Auditoría de los Sistemas de Gestión</span>
+        <span class="cert-issuer">Udemy — sep. 2026</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Auditoría interna basada en riesgos</span>
+        <span class="cert-issuer">Udemy · Pirani — ago. 2026</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Python for Analytics (Clases en vivo, 44 h)</span>
+        <span class="cert-issuer">DMC — sep. 2024</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Curso Online: PLAFT para no especialistas</span>
+        <span class="cert-issuer">BURSEN — feb. 2024</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Programa de Especialización en Gestión de Inversiones y Mercado de Capitales</span>
+        <span class="cert-issuer">Bursen · BVL — jul. 2024 – feb. 2025</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">XIII Programa de Especialización en BI & BA (188 h)</span>
+        <span class="cert-issuer">UNI — sep. 2023 – feb. 2024</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">SQL Server for Analytics</span>
+        <span class="cert-issuer">WE Educación Ejecutiva — sep. 2023</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Data Analytics</span>
+        <span class="cert-issuer">WE Educación Ejecutiva — ago. 2023</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Microsoft Power BI</span>
+        <span class="cert-issuer">WE Educación Ejecutiva — sep. 2023</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Intermediate SQL</span>
+        <span class="cert-issuer">DataCamp — sep. 2023</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Especialización en Finanzas Avanzadas (240 h)</span>
+        <span class="cert-issuer">CEU Centro de Especialización — ene. 2023 – jul. 2023</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Especialización en SAP ERP (140 h)</span>
+        <span class="cert-issuer">WE Educación Ejecutiva — ago. 2021 – ene. 2022</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Especialización en Excel Empresarial (120 h)</span>
+        <span class="cert-issuer">UNI · CEPS-UNI — ene. 2020 – ago. 2021</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-title">Bloomberg Market Concepts</span>
+        <span class="cert-issuer">Bloomberg for Education — sep. 2021 – nov. 2021</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="contact-block">
+      <div>
+        <h2>Conversemos</h2>
+        <p>hinoscard71@gmail.com · +51 972 371 686</p>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/j-hinostroza-c" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://github.com/JHINOSTROZ" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <p class="foot-note">José Hinostroza Cárdenas — Lima, Perú</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
