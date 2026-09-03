@@ -1,1 +1,0 @@
-# JHINOSTROZ.github.io
